@@ -1,3 +1,8 @@
+export const metadata = {
+  title: 'Lead Management App',
+  description: 'Manage your leads and view submissions easily.',
+};
+
 import Link from 'next/link';
 
 const HomePage = () => {
@@ -9,14 +14,12 @@ const HomePage = () => {
           Choose an option below to get started.
         </p>
         <div className="flex flex-col space-y-4">
-          {/* Link to Lead Form Page */}
           <Link href="/lead-form">
             <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
               Go to Lead Form
             </button>
           </Link>
 
-          {/* Link to Internal Lead List Page */}
           <Link href="/internal-lead-list">
             <button className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition">
               Go to Internal Lead List
