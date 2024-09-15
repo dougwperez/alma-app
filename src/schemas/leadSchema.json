@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "minLength": 1,
+      "title": "First Name"
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Last Name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+    },
+    "linkedin": {
+      "type": "string",
+      "format": "uri",
+      "title": "LinkedIn"
+    },
+    "visasInterested": {
+      "type": "array",
+      "title": "Visas that you’re interested in",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "resume": {
+      "type": "string",
+      "format": "data-url",
+      "title": "Resume / CV"
+    },
+    "additionalInformation": {
+      "type": "string",
+      "title": "Additional Information"
+    }
+  },
+  "required": ["firstName", "lastName", "email", "linkedin"]
+}
