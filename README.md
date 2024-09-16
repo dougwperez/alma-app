@@ -18,7 +18,7 @@ email: admin@example.com
 
 password: password
 
-For more info about my decisions, feel free to check out the [Design Document](https://github.com/dougwperez/alma-app/blob/main/DesignDocument.MD)
+For more info about my decisions, feel free to check out the [Design Document](https://github.com/dougwperez/alma-app/blob/main/DesignDocument.MD).
 
 
 
