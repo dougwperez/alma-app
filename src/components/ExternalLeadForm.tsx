@@ -1,12 +1,11 @@
 "use client";
 
 import React from 'react';
-import JsonForm from './JsonForm'; // Import the JsonForm component
+import JsonForm from './JsonForm';
 
 const ExternalLeadForm = () => {
   return (
     <div>
-      {/* Render the JsonForm component to display the form */}
       <JsonForm />
     </div>
   );

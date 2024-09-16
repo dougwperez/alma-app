@@ -4,7 +4,7 @@ import { useSession, signIn } from 'next-auth/react';
 import InternalLeadList from '../../components/InternalLeadList';
 
 const InternalLeadListPage = () => {
-  const { data: session, status } = useSession(); // Get session data and status
+  const { data: session, status } = useSession();
   console.log('Koca: session ', session);
 
   if (status === 'loading') {
@@ -14,11 +14,10 @@ const InternalLeadListPage = () => {
           <p className="text-lg font-semibold text-gray-700">Loading...</p>
         </div>
       </div>
-    ); // Display a loading state while checking authentication
+    );
   }
 
   if (!session) {
-    // If no session, prompt for sign-in
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 shadow-md rounded-lg text-center">

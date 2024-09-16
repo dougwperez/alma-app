@@ -1,30 +1,33 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { JsonForms } from '@jsonforms/react';
 import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
+import { UISchemaElement, JsonSchema } from '@jsonforms/core';
 import leadSchema from '../schemas/leadSchema.json';
 import leadUiSchema from '../schemas/leadUiSchema.json';
 import Image from 'next/image';
 import FileUploadRenderer from './FileUploadRenderer';
 import Hero from './Hero';
 
-// Define a tester function that checks if the field format is 'data-url' for the 'resume' field
-const fileUploadTester = (uischema, schema) => {
+
+const fileUploadTester = (uischema: UISchemaElement, schema: JsonSchema) => {
   return schema?.format === 'data-url' && uischema?.scope === '#/properties/resume' ? 5 : -1;
 };
 
-// Combine material renderers with your custom renderer
 const renderers = [
   ...materialRenderers,
-  { tester: fileUploadTester, renderer: FileUploadRenderer }, // Use the specific tester
+  { tester: fileUploadTester, renderer: FileUploadRenderer },
 ];
 
 const JsonForm = () => {
   const [formData, setFormData] = useState({});
   const [submissionMessage, setSubmissionMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
-  const handleChange = ({ data }: any) => {
+  const handleChange = ({ data }: { data: any }) => {
     setFormData(data);
   };
 
@@ -39,14 +42,20 @@ const JsonForm = () => {
       });
 
       if (response.ok) {
-        setSubmissionMessage('Form submitted successfully!');
+        setSubmissionMessage('Your information was submitted to our team of immigration attorneys. Expect an email from hello@tryalma.ai.');
       } else {
         setSubmissionMessage('Failed to submit form.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmissionMessage('An error occurred while submitting the form.');
+    } finally {
+      setIsModalOpen(true);
     }
+  };
+
+  const navigateToHome = () => {
+    router.push('/');
   };
 
   return (
@@ -56,8 +65,8 @@ const JsonForm = () => {
         <Image
           src="/images/scroll.png"
           alt="Paperclip"
-          width={40} // Set the desired width
-          height={40} // Set the desired height
+          width={40}
+          height={40}
         />
       </div>
       <div className="max-w-lg mx-auto p-2 pt-5 bg-white">
@@ -79,11 +88,22 @@ const JsonForm = () => {
         >
           Submit
         </button>
-
-        {submissionMessage && (
-          <p className="text-center mt-4 text-gray-700">{submissionMessage}</p>
-        )}
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-1000">
+          <div className="bg-white p-8 rounded shadow-lg max-w-md relative top-[-20%] text-center">
+            <h3 className="text-xl font-semibold mb-4">Thank You</h3>
+            <p>{submissionMessage}</p>
+            <button
+              onClick={navigateToHome}
+              className="mt-4 bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition"
+            >
+              Go to Home Page
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

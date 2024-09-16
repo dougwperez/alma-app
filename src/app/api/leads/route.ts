@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Mock data store (in-memory)
 const leads = [
   {
     id: 1,
@@ -16,7 +15,6 @@ const leads = [
 ];
 
 export async function GET() {
-  // Fetch all leads
   return NextResponse.json(leads);
 }
 
@@ -25,7 +23,7 @@ export async function POST(request: NextRequest) {
   const newLead = {
     ...body,
     id: leads.length + 1,
-    state: 'PENDING', // Default state is PENDING
+    state: 'PENDING', 
   };
   leads.push(newLead);
   return NextResponse.json(newLead, { status: 201 });
