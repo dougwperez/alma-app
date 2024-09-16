@@ -23,7 +23,10 @@
     },
     {
       "type": "Control",
-      "scope": "#/properties/resume"
+      "scope": "#/properties/visasInterested",
+      "options": {
+        "format": "radio"
+      }
     },
     {
       "type": "Control",

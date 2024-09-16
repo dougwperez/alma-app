@@ -5,17 +5,27 @@ import { JsonForms } from '@jsonforms/react';
 import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
 import leadSchema from '../schemas/leadSchema.json';
 import leadUiSchema from '../schemas/leadUiSchema.json';
+import FileUploadRenderer from './FileUploadRenderer';
+
+// Define a tester function that checks if the field format is 'data-url' for the 'resume' field
+const fileUploadTester = (uischema, schema) => {
+  return schema?.format === 'data-url' && uischema?.scope === '#/properties/resume' ? 5 : -1;
+};
+
+// Combine material renderers with your custom renderer
+const renderers = [
+  ...materialRenderers,
+  { tester: fileUploadTester, renderer: FileUploadRenderer }, // Use the specific tester
+];
 
 const JsonForm = () => {
   const [formData, setFormData] = useState({});
   const [submissionMessage, setSubmissionMessage] = useState('');
 
-  // Handle form data changes
   const handleChange = ({ data }: any) => {
     setFormData(data);
   };
 
-  // Handle form submission
   const handleSubmit = async () => {
     try {
       const response = await fetch('/api/leads', {
@@ -39,32 +49,27 @@ const JsonForm = () => {
 
   return (
     <div className="max-w-lg mx-auto p-8 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold text-center mb-4">
-        Want to understand your visa options?
-      </h2>
-      <p className="text-gray-600 text-center mb-8">
-        Submit the form below and our team of experienced attorneys will review your information and send a preliminary assessment of your case based on your goals.
-      </p>
+      <h2 className="text-2xl font-bold text-center mb-4">Submit Your Information</h2>
+      <p className="text-gray-600 text-center mb-8">Please fill out the form below and upload your resume to proceed.</p>
 
-      {/* JSONForms integration to render form dynamically */}
       <JsonForms
         schema={leadSchema}
         uischema={leadUiSchema}
         data={formData}
-        renderers={materialRenderers}
+        renderers={renderers}
         cells={materialCells}
         onChange={handleChange}
       />
 
       <button
         onClick={handleSubmit}
-        className="w-full bg-black text-white py-2 mt-6 rounded hover:bg-gray-800 transition"
+        className="w-full bg-blue-500 text-white py-2 mt-6 rounded hover:bg-blue-600 transition"
       >
         Submit
       </button>
 
       {submissionMessage && (
-        <p className="text-gray-600 text-center mt-4">{submissionMessage}</p>
+        <p className="text-center mt-4 text-gray-700">{submissionMessage}</p>
       )}
     </div>
   );

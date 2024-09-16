@@ -23,17 +23,16 @@
       "title": "LinkedIn"
     },
     "visasInterested": {
-      "type": "array",
+      "type": "string", 
       "title": "Visas that you’re interested in",
-      "items": {
-        "type": "string"
-      },
-      "uniqueItems": true
+      "enum": ["0-1", "EB-1A", "EB-2 NIW", "I don't know"]
     },
     "resume": {
       "type": "string",
-      "format": "data-url",
-      "title": "Resume / CV"
+      "contentMediaType": "application/pdf",
+      "contentEncoding": "base64",
+      "title": "Resume / CV",
+      "format": "data-url"
     },
     "additionalInformation": {
       "type": "string",
