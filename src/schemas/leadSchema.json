@@ -36,7 +36,7 @@
     },
     "additionalInformation": {
       "type": "string",
-      "title": "Additional Information"
+      "title": "How can we help you"
     }
   },
   "required": ["firstName", "lastName", "email", "linkedin"]
