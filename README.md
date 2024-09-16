@@ -1,3 +1,4 @@
+## How to run the application locally
 
 ```bash
 yarn install
@@ -15,6 +16,8 @@ In order to access the internal lead list, you will have to use the following au
 
 email: admin@example.com
 password: password
+
+Check out the [Design Document](https://github.com/dougwperez/alma-app/blob/main/DesignDocument.MD)
 
 
 
