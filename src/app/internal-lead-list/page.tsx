@@ -38,7 +38,7 @@ const InternalLeadListPage = () => {
 
   return (
     <main className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-2xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+      <div className="">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Internal Leads List</h1>
         <InternalLeadList />
       </div>
